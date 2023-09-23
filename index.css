@@ -33,6 +33,7 @@
 .res-logo{
     
     width: 190px;
+<<<<<<< HEAD
 }
 
 .restaurant-container {
@@ -41,3 +42,5 @@
     justify-content: space-between; 
     gap: 20px; 
   }
+=======
+>>>>>>> 8dade21 (first commit)

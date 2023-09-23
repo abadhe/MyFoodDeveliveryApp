@@ -109,7 +109,10 @@ const resArr = [
 
 const RestaurantCard = (props) => {
   const { resData } = props;
+<<<<<<< HEAD
   const {name, address} = resData
+=======
+>>>>>>> 8dade21 (first commit)
   return (
     <div className="res-card" style={{ backgroundColor: "#f0f0f0" }}>
       <img
@@ -117,8 +120,13 @@ const RestaurantCard = (props) => {
         src="https://img.cdn4dd.com/cdn-cgi/image/fit=cover,width=1000,height=300,format=auto,quality=80/https://doordash-static.s3.amazonaws.com/media/store/header/451cc447-02c6-4455-b04d-fe857d6aa096.jpeg"
         alt="Restaurant Logo"
       />
+<<<<<<< HEAD
       <h3>{name}</h3>
       <h3>{address}</h3>
+=======
+      <h3>{resData.name}</h3>
+      <h3>{resData.address}</h3>
+>>>>>>> 8dade21 (first commit)
     </div>
   );
 };
