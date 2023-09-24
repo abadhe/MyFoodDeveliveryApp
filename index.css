@@ -21,19 +21,26 @@
 
 .res-card{
     width: 200px;
-    height: 300px;
+    height: 100%;
     border: 1px solid;
     padding: 5px;
 }
 
-.search{
+.search-container{
     padding: 10px;
 }
 
+.filter{
+    display: flex;
+    padding: 20px;
+}
+.clear-btn{
+    margin-left: 20px;
+}
+
 .res-logo{
-    
     width: 190px;
-<<<<<<< HEAD
+ 
 }
 
 .restaurant-container {
@@ -41,6 +48,17 @@
     flex-wrap: wrap; 
     justify-content: space-between; 
     gap: 20px; 
-  }
-=======
->>>>>>> 8dade21 (first commit)
+}
+
+.shimmer-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.shimmer-card{
+    margin: 20px;
+    width: 200px;
+    height: 400px;
+    background-color: #f0f0f0;
+}
+
