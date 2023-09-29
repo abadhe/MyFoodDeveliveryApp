@@ -17,14 +17,43 @@ const Body = () => {
   }, []);
   
   //api call
+  // const fetchData = async () => {
+  //   const data = await fetch(API_URL);
+  //   const json = await data.json();
+  //   if(if (json?.data?.cards?.[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants) {
+  //     const restaurants = json.data.cards[2].card.card.gridElements.infoWithStyle.restaurants;
+
+  //     // Update state or perform other actions with the 'restaurants' data
+  //     setOriginalListOfRestaurants(restaurants);
+  //     setListOfRestaurants(restaurants);
+  //   })
+  //   const restaurants =
+  //     json.data.cards[2].card.card.gridElements.infoWithStyle.restaurants;
+  //   setOriginalListOfRestaurants(restaurants);
+  //   setListOfRestaurants(restaurants);
+  // };
   const fetchData = async () => {
-    const data = await fetch(API_URL);
-    const json = await data.json();
-    const restaurants =
-      json.data.cards[2].card.card.gridElements.infoWithStyle.restaurants;
-    setOriginalListOfRestaurants(restaurants);
-    setListOfRestaurants(restaurants);
+    try {
+      const data = await fetch(API_URL);
+      const json = await data.json();
+  
+      // Check if the necessary nested properties exist before accessing them
+      if (json?.data?.cards?.[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants) {
+        const restaurants = json.data.cards[2].card.card.gridElements.infoWithStyle.restaurants;
+  
+        // Update state or perform other actions with the 'restaurants' data
+        setOriginalListOfRestaurants(restaurants);
+        setListOfRestaurants(restaurants);
+      } else {
+        // Handle the case where the expected data structure is not found
+        console.error("Data structure not as expected:", json);
+      }
+    } catch (error) {
+      // Handle any fetch or JSON parsing errors here
+      console.error("Error fetching data:", error);
+    }
   };
+  
 
   //Click handlers
   const handleFilterClick = () => {
@@ -33,11 +62,13 @@ const Body = () => {
     );
     setItemFound("Item Found")
     setListOfRestaurants(filterList);
+    setSearchText("");
     console.log(listOfRestaurants);
   };
 
   const handleClearClick = () => {
     setItemFound("")
+    setSearchText("")
     setListOfRestaurants(originalListOfRestaurants);
   };
 
