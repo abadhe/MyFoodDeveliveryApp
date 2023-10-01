@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { API_URL } from "../utils/constants.js";
 import Shimmer from "./Shimmer.js";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus.js";
 
 const Body = () => {
   //States
@@ -19,29 +20,14 @@ const Body = () => {
 
   //api call
   const fetchData = async () => {
-    try {
-      const data = await fetch(API_URL);
-      const json = await data.json();
+    const data = await fetch(API_URL);
+    const json = await data.json();
+    //console.log(json)
+    const restaurants =
+      json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants;
 
-      // Check if the necessary nested properties exist before accessing them
-      if (
-        json?.data?.cards?.[2]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants
-      ) {
-        const restaurants =
-          json.data.cards[2].card.card.gridElements.infoWithStyle.restaurants;
-
-        // Update state or perform other actions with the 'restaurants' data
-        setOriginalListOfRestaurants(restaurants);
-        setListOfRestaurants(restaurants);
-      } else {
-        // Handle the case where the expected data structure is not found
-        console.error("Data structure not as expected:", json);
-      }
-    } catch (error) {
-      // Handle any fetch or JSON parsing errors here
-      console.error("Error fetching data:", error);
-    }
+    setOriginalListOfRestaurants(restaurants);
+    setListOfRestaurants(restaurants);
   };
 
   //Click handlers
@@ -78,7 +64,14 @@ const Body = () => {
       setItemFound("Item Found");
     }
   };
-
+  const onlineStatus = useOnlineStatus();
+  if (!onlineStatus) {
+    return (
+      <div>
+        <p>You seem to be offline, check your internet connection</p>
+      </div>
+    );
+  }
   //Shimmer - Conditional rendering
   if (listOfRestaurants.length === 0) {
     return <Shimmer />;
